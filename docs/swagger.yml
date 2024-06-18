@@ -392,18 +392,24 @@ components:
         id:
           type: integer
           format: int64
-        plate:
+        licensePlate:
           type: string
           format: plate
+        brand:
+          type: string
         model:
+          type: string
+        color:
           type: string
         owner:
           $ref: "#/components/schemas/Owner"
       required:
         - id
-        - plate
+        - licensePlate
+        - brand
         - model
-        - owner
+        - color
+        - ownerDTO
 
     VehicleDTO:
       type: object
@@ -411,14 +417,21 @@ components:
         id:
           type: integer
           format: int64
-        plate:
+        licensePlate:
+          type: string
+          format: plate
+        brand:
           type: string
         model:
           type: string
-        ownerId:
-          type: integer
-          format: int64
+        color:
+          type: string
+        ownerDTO:
+          type: object
+          format: OwnerDTO
       required:
-        - plate
+        - licensePlate
+        - brand
         - model
-        - ownerId
+        - color
+        - ownerDTO
