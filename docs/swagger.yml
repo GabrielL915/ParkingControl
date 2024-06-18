@@ -1,0 +1,424 @@
+openapi: "3.0.2"
+info:
+  title: Parking Control
+  version: "1.0"
+servers:
+  - url: http://localhost:8080/parking-control/api
+    description: Local server
+    variables:
+      port:
+        default: "8080"
+        description: The port number
+      basePath:
+        default: parking-control
+        description: The base path
+      scheme:
+        default: http
+        description: The protocol
+      url:
+        default: http://localhost:8080/parking-control/api
+        description: The URL
+
+tags:
+  - name: Vehicles
+    description: Operations about vehicles
+  - name: Apartments
+    description: Operations about apartments
+  - name: Owners
+    description: Operations about owners
+
+paths:
+  #VEHICLES
+  /vehicles:
+    post:
+      tags:
+        - Vehicles
+      summary: Create a new vehicle
+      operationId: createVehicle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VehicleDTO"
+        required: true
+      responses:
+        "201":
+          description: Vehicle created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+    get:
+      tags:
+        - Vehicles
+      summary: List all vehicles
+      operationId: listVehicles
+      responses:
+        "200":
+          description: A list of vehicles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vehicle"
+  /vehicles/{id}:
+    get:
+      tags:
+        - Vehicles
+      summary: Get vehicle by ID
+      operationId: getVehicleById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the vehicle to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Vehicle found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+    put:
+      tags:
+        - Vehicles
+      summary: Update a vehicle
+      operationId: updateVehicle
+      parameters:
+        - name: id
+          in: path
+          description: ID of the vehicle to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VehicleDTO"
+        required: true
+      responses:
+        "200":
+          description: Vehicle updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+    delete:
+      tags:
+        - Vehicles
+      summary: Delete a vehicle
+      operationId: deleteVehicle
+      parameters:
+        - name: id
+          in: path
+          description: ID of the vehicle to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Vehicle deleted successfully
+
+  #APARTMENTS
+  /apartments:
+    post:
+      tags:
+        - Apartments
+      summary: Create a new apartment
+      operationId: createApartment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApartmentDTO"
+        required: true
+      responses:
+        "201":
+          description: Apartment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Apartment"
+    get:
+      tags:
+        - Apartments
+      summary: List all apartments
+      operationId: listApartments
+      responses:
+        "200":
+          description: A list of apartments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Apartment"
+  /apartments/{id}:
+    get:
+      tags:
+        - Apartments
+      summary: Get apartment by ID
+      operationId: getApartmentById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the apartment to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Apartment found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Apartment"
+    put:
+      tags:
+        - Apartments
+      summary: Update an apartment
+      operationId: updateApartment
+      parameters:
+        - name: apartmentId
+          in: path
+          description: ID of the apartment to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApartmentDTO"
+        required: true
+      responses:
+        "200":
+          description: Apartment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Apartment"
+    delete:
+      tags:
+        - Apartments
+      summary: Delete an apartment
+      operationId: deleteApartment
+      parameters:
+        - name: id
+          in: path
+          description: ID of the apartment to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Apartment deleted successfully
+
+  #OWNERS
+  /owners:
+    post:
+      tags:
+        - Owners
+      summary: Create a new owner
+      operationId: createOwner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OwnerDTO"
+        required: true
+      responses:
+        "201":
+          description: Owner created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
+    get:
+      tags:
+        - Owners
+      summary: List all owners
+      operationId: listOwners
+      responses:
+        "200":
+          description: A list of owners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+  /owners/{id}:
+    get:
+      tags:
+        - Owners
+      summary: Get owner by ID
+      operationId: getOwnerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the owner to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Owner found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
+    put:
+      tags:
+        - Owners
+      summary: Update an owner
+      operationId: updateOwner
+      parameters:
+        - name: id
+          in: path
+          description: ID of the owner to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OwnerDTO"
+        required: true
+      responses:
+        "200":
+          description: Owner updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
+    delete:
+      tags:
+        - Owners
+      summary: Delete an owner
+      operationId: deleteOwner
+      parameters:
+        - name: id
+          in: path
+          description: ID of the owner to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Owner deleted successfully
+
+components:
+  schemas:
+    Owner:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        document:
+          type: string
+          format: document
+      required:
+        - id
+        - name
+        - document
+
+    OwnerDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        document:
+          type: string
+          format: document
+      required:
+        - name
+        - document
+
+    Apartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        owner:
+          $ref: "#/components/schemas/Owner"
+      required:
+        - id
+        - number
+        - owner
+    ApartmentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        ownerDTO:
+          type: object
+          format: OwnerDTO
+      required:
+        - number
+        - ownerDTO
+
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        plate:
+          type: string
+          format: plate
+        model:
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+      required:
+        - id
+        - plate
+        - model
+        - owner
+
+    VehicleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        plate:
+          type: string
+        model:
+          type: string
+        ownerId:
+          type: integer
+          format: int64
+      required:
+        - plate
+        - model
+        - ownerId
