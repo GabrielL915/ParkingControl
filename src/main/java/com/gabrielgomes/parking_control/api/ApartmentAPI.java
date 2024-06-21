@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/apartment")
 public class ApartmentAPI extends CRUDAPI<Apartment, Long, ApartmentDTO> {
+
 }

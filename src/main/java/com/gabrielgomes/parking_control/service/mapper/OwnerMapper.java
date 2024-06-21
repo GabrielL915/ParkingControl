@@ -18,6 +18,11 @@ public class OwnerMapper implements ParkingControlMapper<Owner, OwnerDTO> {
 
     @Override
     public Owner toEntity(OwnerDTO ownerDTO) {
-        return new Owner(ownerDTO.getName(), ownerDTO.getDocument());
+//        return new Owner(ownerDTO.getName(), ownerDTO.getDocument());
+        return (Owner) Owner.builder()
+                .name(ownerDTO.getName())
+                .document(ownerDTO.getDocument())
+                .id(ownerDTO.getId())
+                .build();
     }
 }

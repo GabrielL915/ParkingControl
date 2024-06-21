@@ -1,5 +1,7 @@
 package com.gabrielgomes.parking_control.service.exception;
 
+import java.util.function.Supplier;
+
 public class EntityNotFoundException extends ParkingControlStandardException {
 
     private static final String DEFAULT_MESSAGE = "Unable to find entity.";
