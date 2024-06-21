@@ -58,13 +58,20 @@ public class ApartmentService extends CRUDService<Apartment, Long, ApartmentDTO>
     }
 
     private void createParkingSpotIfNotExists(Apartment apartment) {
-        parkingSpotRepository.findByNumber(apartment.getNumber())
-                .orElseGet(() -> {
-                    ParkingSpot newParkingSpot = ParkingSpot.builder()
-                            .number(apartment.getNumber())
-                            .apartment(apartment)
-                            .build();
-                    return parkingSpotRepository.save(newParkingSpot);
-                });
+        if (!parkingSpotAlreadyExists(apartment.getNumber())) {
+            createParkingSpot(apartment);
+        }
+    }
+
+    private void createParkingSpot(Apartment apartment) {
+        ParkingSpot newParkingSpot = ParkingSpot.builder()
+                .number(apartment.getNumber())
+                .apartment(apartment)
+                .build();
+        parkingSpotRepository.save(newParkingSpot);
+    }
+
+    private boolean parkingSpotAlreadyExists(String number) {
+        return parkingSpotRepository.existsByNumber(number);
     }
 }

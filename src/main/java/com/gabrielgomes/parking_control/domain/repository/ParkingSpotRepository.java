@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface ParkingSpotRepository extends CRUDRepository<ParkingSpot, Long> {
     Optional<ParkingSpot> findByNumber(String number);
+    boolean existsByNumber(String number);
 }
